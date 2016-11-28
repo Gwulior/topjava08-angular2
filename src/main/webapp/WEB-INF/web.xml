@@ -33,7 +33,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>mvc-dispatcher</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/topjava-rs/*</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -50,7 +50,17 @@
     </filter>
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/topjava-rs/*</url-pattern>
+    </filter-mapping>
+
+    <!--CORS FILTER-->
+    <filter>
+        <filter-name>CORS</filter-name>
+        <filter-class>ru.javawebinar.topjava.web.handler.CorsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CORS</filter-name>
+        <url-pattern>/topjava-rs/*</url-pattern>
     </filter-mapping>
 
     <!-- Spring Security -->
@@ -60,7 +70,7 @@
     </filter>
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/topjava-rs/*</url-pattern>
     </filter-mapping>
 
 </web-app>
