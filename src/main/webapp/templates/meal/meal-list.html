@@ -56,12 +56,9 @@
                         </button>
                     </div>
 
-
-                    <a class="btn btn-sm btn-info" id="add" (click)="showCreateModal()">{{'meals.add' | i18nPipe}}</a>
-
                     <br/>
 
-                    <p-dataTable [value]="(mealsHolder | async)" selectionMode="single"
+                    <p-dataTable [value]="(mealsHolder | async)" selectionMode="single" [rowStyleClass]="getRowClass"
                                  (onRowSelect)="selectMeal($event)" [paginator]="true" rows="10" [responsive]="true">
 
                         <p-column field="dateTime" [sortable]="true" header="{{'meals.dateTime' | i18nPipe}}">
@@ -81,6 +78,12 @@
                                         label="{{'common.delete' | i18nPipe}}"></button>
                             </template>
                         </p-column>
+                        <footer>
+                            <div class="ui-helper-clearfix" style="width:100%">
+                                <button type="button" pButton icon="fa-plus" style="float:left"
+                                        (click)="showCreateModal()" label="{{'meals.add' | i18nPipe}}"></button>
+                            </div>
+                        </footer>
                     </p-dataTable>
                 </div>
             </div>

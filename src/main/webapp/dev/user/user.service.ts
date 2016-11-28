@@ -44,11 +44,19 @@ export class UserService {
         return this.http.delete(basePath + usersPath + user.id, reqOptions);
     }
 
-    updateUser(user: UserModel): Observable<Response> {
+    saveUser(user: UserModel): Observable<Response> {
+        if (user.id) {
+            return this.updateUser(user);
+        } else {
+            return this.createUser(user);
+        }
+    }
+
+    private updateUser(user: UserModel): Observable<Response> {
         return this.http.put(basePath + usersPath + user.id, JSON.stringify(user), reqOptionsJson);
     }
 
-    createUser(user: UserModel): Observable<Response> {
+    private createUser(user: UserModel): Observable<Response> {
 
         return this.http.post(basePath + usersPath, JSON.stringify(user), reqOptionsJson);
     }

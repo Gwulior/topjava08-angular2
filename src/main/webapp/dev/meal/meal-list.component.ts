@@ -1,9 +1,9 @@
 import {Component, ViewChild} from "@angular/core";
 import {MealService} from "./meal.service";
 import {Observable} from "rxjs";
-import {UserMeal} from "../model/userMeal";
 import {FormBuilder} from "@angular/forms";
 import {EditMealComponent} from "./meal-edit.component";
+import {UserMeal} from "../model/meal.model";
 /**
  * Created by gwuli on 30.10.2016.
  */
@@ -77,6 +77,10 @@ export class MealListComponent {
         this.startTime = null;
         this.endTime = null;
         this.updateList();
+    }
+
+    getRowClass(rowData: UserMeal, rowIndex): string {
+        return rowData.exceed ? "exceeded" : null;
     }
 
 }

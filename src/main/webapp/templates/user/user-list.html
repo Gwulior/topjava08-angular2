@@ -4,8 +4,6 @@
             <h3>{{'users.title' | i18nPipe}}</h3>
 
             <div class="view-box">
-                <button (click)="showCreateModal()" class="btn btn-sm btn-info" id="add">{{'users.add' | i18nPipe}}
-                </button>
                 <!--grid-->
                 <p-dataTable [value]="usersHolder | async" (onRowSelect)="onEdit($event)" selectionMode="single"
                              [paginator]="true" rows="10" [responsive]="true">
@@ -40,7 +38,12 @@
                             <button pButton (click)="onDelete(user)" label="{{'common.delete' | i18nPipe}}"></button>
                         </template>
                     </p-column>
-
+                    <footer>
+                        <div class="ui-helper-clearfix" style="width:100%">
+                            <button type="button" pButton icon="fa-plus" style="float:left"
+                                    (click)="showCreateModal()" label="{{'users.add' | i18nPipe}}"></button>
+                        </div>
+                    </footer>
                 </p-dataTable>
             </div>
         </div>

@@ -2,13 +2,9 @@ package ru.javawebinar.topjava.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.to.UserTo;
@@ -23,7 +19,7 @@ import java.util.Properties;
  * User: gkislin
  * Date: 22.08.2014
  */
-@Controller
+@RestController
 public class RootController extends AbstractUserController {
 
     @Autowired

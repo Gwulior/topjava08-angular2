@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {basePath, reqOptions} from "../shared/config.component";
 import {UserModel} from "../model/user.model";
 import {Observable} from "rxjs/Rx";
+import {ExceptionService} from "../service/exception/exception.service";
 
 
 @Injectable()
@@ -18,22 +19,31 @@ export class AuthService {
 
 
   constructor(private http: Http,
-              private router: Router) {
+              private router: Router,
+              private exceptionService: ExceptionService) {
   }
 
-  login(token: Token): Observable<Response> {
+  login(token: Token): void {
 
     let headers:Headers = new Headers({'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'});
     let options = new RequestOptions({
       headers: headers,
       withCredentials: true
     });
-    return this.http.post(basePath + "/spring_security_check",
+    this.http.post(basePath + "/spring_security_check",
     "username=" + token.login +
     "&password=" + token.password,
       options).map( res => {
       return res;
-    });
+    }).subscribe(
+        res => {
+          this.router.navigate(["meal-list"])
+        },
+        error => {
+          this.exceptionService.onError(error);
+          console.log("login was failed");
+        }
+    );;
 
   }
 

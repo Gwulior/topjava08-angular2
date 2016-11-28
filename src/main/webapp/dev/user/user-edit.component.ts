@@ -25,8 +25,9 @@ export class UserEditComponent {
             {
                 id: [''],
                 name: ['', Validators.required],
+                roles: [''],
                 email: ['', Validators.required],
-                password: ['', Validators.required]
+                password: ['', Validators.compose([Validators.required, Validators.minLength(5)])]
             }
         )
     }
@@ -35,6 +36,7 @@ export class UserEditComponent {
         this.userForm.patchValue({
             id: user.id,
             name: user.name,
+            roles: user.roles,
             email: user.email,
             // password: user.password
         });

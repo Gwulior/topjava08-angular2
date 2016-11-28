@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Http, Response, URLSearchParams, RequestOptionsArgs} from "@angular/http";
 import {basePath, mealPath, reqOptions, reqOptionsJson} from "../shared/config.component";
 import {Observable} from "rxjs";
-import {UserMeal} from "../model/userMeal";
+import {UserMeal} from "../model/meal.model";
 import {DateTimeTransformer} from "../date-time.transformer";
 /**
  * Created by gwuli on 30.10.2016.

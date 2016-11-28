@@ -2,7 +2,7 @@ package ru.javawebinar.topjava.web.handler;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import ru.javawebinar.topjava.web.dto.ErrorDTO;
+import ru.javawebinar.topjava.util.exception.ErrorInfo;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 
 import javax.servlet.ServletException;
@@ -24,6 +24,6 @@ public class MyUrlAuthenticationFailureHandler extends SimpleUrlAuthenticationFa
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
-        writer.write(JsonUtil.writeValue(new ErrorDTO(exception.getClass().getSimpleName())));
+        writer.write(JsonUtil.writeValue(new ErrorInfo(request.getRequestURI(), exception)));
     }
 }

@@ -24,6 +24,7 @@ import {DataTableModule} from "primeng/components/datatable/datatable";
 import {DatePipe} from "@angular/common";
 import {DateTimeTransformer} from "./date-time.transformer";
 import {GrowlModule} from "primeng/components/growl/growl";
+import {ExceptionService} from "./service/exception/exception.service";
 
 /**
  * Created by gwuli on 30.10.2016.
@@ -41,7 +42,8 @@ import {GrowlModule} from "primeng/components/growl/growl";
         I18nPipe
     ],
     bootstrap: [AppComponent],
-    providers: [AuthService, AuthActivateGuard, MealService, UserService, I18nService, DateTimeTransformer, DatePipe,
+    providers: [AuthService, AuthActivateGuard, MealService, UserService,
+        I18nService, DateTimeTransformer, DatePipe, ExceptionService,
         {
             provide: APP_INITIALIZER,
             // useFactory: (i18NService: I18nService) => () => i18NService.initMessages(I18Enum.ru),

@@ -2,7 +2,7 @@
  * Created by gwuli on 31.10.2016.
  */
 import {Component, Output, EventEmitter} from "@angular/core";
-import {UserMeal} from "../model/userMeal";
+import {UserMeal} from "../model/meal.model";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {ValidateUtil} from "../validators/validate-util";
 
