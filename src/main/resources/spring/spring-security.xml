@@ -34,7 +34,7 @@
     </http>
 
 
-    <beans:bean id="entryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint"/>
+    <beans:bean id="entryPoint" class="ru.javawebinar.topjava.web.handler.RestAuthenticationEntryPoint"/>
     <beans:bean id="myAuthenticationSuccessHandler" class="ru.javawebinar.topjava.web.handler.MySavedRequestAwareAuthenticationSuccessHandler" />
     <beans:bean id="myUrlAuthenticationFailureHandler" class="ru.javawebinar.topjava.web.handler.MyUrlAuthenticationFailureHandler" />
     <beans:bean id="myLogoutSuccessHandler" class="ru.javawebinar.topjava.web.handler.MyCustomLogoutSuccessHandler" />

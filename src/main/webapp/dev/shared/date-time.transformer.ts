@@ -18,8 +18,8 @@ export class DateTimeTransformer {
 
     public serializeTime(time: Date) {
         return this.addZero(time.getHours())
-            + ':' + this.addZero(time.getMinutes());
-        // + ':' + time.getSeconds()
+            + ':' + this.addZero(time.getMinutes())
+        + ':' + this.addZero(time.getSeconds());
         // + '.' + String( (time.getMilliseconds()/1000).toFixed(3) ).slice( 2, 5 )
         // + 'Z';
     }

@@ -1,16 +1,16 @@
 /**
  * Created by gwuli on 31.10.2016.
  */
-import {Component, Output, EventEmitter} from "@angular/core";
-import {UserMeal} from "../model/meal.model";
+import {Component, Output, EventEmitter, OnInit} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {ValidateUtil} from "../validators/validate-util";
+import {UserMeal} from "../../model/meal.model";
+import {ValidateUtil} from "../../validators/validate.util";
 
 @Component({
     templateUrl: '../../templates/meal/meal-edit.html',
     selector: 'edit-meal'
 })
-export class EditMealComponent {
+export class EditMealComponent implements OnInit {
 
     showToggle: boolean = false;
 
@@ -20,22 +20,19 @@ export class EditMealComponent {
     onSaveEvent: EventEmitter<UserMeal> = new EventEmitter<UserMeal>();
 
     constructor(private formBuilder: FormBuilder) {
-        this.mealForm = formBuilder.group({
+    }
+
+    ngOnInit(): void {
+        this.mealForm = this.formBuilder.group({
             id: [''],
             dateTime: [null, Validators.required],
             description: [``, Validators.required],
-            calories: [``, Validators.compose([Validators.required, ValidateUtil.validateCalories])]
+            calories: [``, Validators.compose([Validators.required, ValidateUtil.validateMealCalories])]
         });
     }
 
     fillMyForm(userMeal: UserMeal) {
-        this.mealForm.patchValue(
-            userMeal
-            // id: [userMeal.id],
-            // dateTime: [userMeal.dateTime, Validators.required],
-            // description: [userMeal.description, Validators.required],
-            // calories: [userMeal.calories, Validators.compose([Validators.required, ValidateUtil.validateCalories])]
-        );
+        this.mealForm.patchValue(userMeal);
     }
 
     resetForm() {
@@ -47,6 +44,4 @@ export class EditMealComponent {
         this.onSaveEvent.emit(value);
         this.mealForm.reset();
     }
-
-
 }

@@ -1,8 +1,8 @@
 import {Http} from "@angular/http";
 import {Injectable} from "@angular/core";
-import {basePath, i18nPath} from "../shared/config.component";
-import {I18Enum} from "./i18n.enum";
+import {I18Enum} from "../model/i18n.enum";
 import {Observable} from "rxjs/Rx";
+import {basePath, i18nPath} from "../shared/config";
 /**
  * Created by gwuli on 14.11.2016.
  */

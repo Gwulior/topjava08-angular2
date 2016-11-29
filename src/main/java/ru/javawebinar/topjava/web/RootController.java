@@ -1,12 +1,7 @@
 package ru.javawebinar.topjava.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
-import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.util.UserUtil;
 import ru.javawebinar.topjava.web.user.AbstractUserController;
@@ -25,35 +20,9 @@ public class RootController extends AbstractUserController {
     @Autowired
     private CustomReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource;
 
-    @PostMapping("/profile")
-    public String updateProfile(@Valid UserTo userTo, BindingResult result, SessionStatus status) {
-        if (!result.hasErrors()) {
-            try {
-                userTo.setId(AuthorizedUser.id());
-                super.update(userTo);
-                AuthorizedUser.get().update(userTo);
-                status.setComplete();
-                return "redirect:meals";
-            } catch (DataIntegrityViolationException ex) {
-                result.rejectValue("email", "exception.duplicate_email");
-            }
-        }
-        return "profile";
-    }
-
     @PostMapping("/register")
-    public String saveRegister(@Valid UserTo userTo, BindingResult result, SessionStatus status, ModelMap model) {
-        if (!result.hasErrors()) {
-            try {
-                super.create(UserUtil.createNewFromTo(userTo));
-                status.setComplete();
-                return "redirect:login?message=app.registered";
-            } catch (DataIntegrityViolationException ex) {
-                result.rejectValue("email", "exception.duplicate_email");
-            }
-        }
-        model.addAttribute("register", true);
-        return "profile";
+    public void saveRegister(@Valid @RequestBody UserTo userTo) {
+        super.create(UserUtil.createNewFromTo(userTo));
     }
 
     @RequestMapping(value = "/i18n/{locale}", method = RequestMethod.GET)

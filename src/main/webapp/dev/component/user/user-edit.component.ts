@@ -1,26 +1,25 @@
 /**
  * Created by gwuli on 13.11.2016.
  */
-import {Component, Output, EventEmitter} from "@angular/core";
+import {Component, Output, EventEmitter, OnInit} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {UserModel} from "../model/user.model";
+import {UserModel} from "../../model/user.model";
+
 @Component({
-    templateUrl: './templates/user/user-edit.html',
+    templateUrl: '../../../templates/user/user-edit.html',
     selector: 'user-edit'
 })
-export class UserEditComponent {
-
+export class UserEditComponent implements OnInit {
     userForm: FormGroup;
-    showToggle: boolean = false;
 
+    showToggle: boolean = false;
     @Output()
     onSaveEvent:EventEmitter<UserModel> = new EventEmitter<UserModel>();
 
     constructor(private formBuilder: FormBuilder) {
-        this.initForm();
     }
 
-    private initForm() {
+    ngOnInit(): void {
         this.userForm = this.formBuilder.group(
             {
                 id: [''],
@@ -31,6 +30,18 @@ export class UserEditComponent {
             }
         )
     }
+
+    // private initForm() {
+    //     this.userForm = this.formBuilder.group(
+    //         {
+    //             id: [''],
+    //             name: ['', Validators.required],
+    //             roles: [''],
+    //             email: ['', Validators.required],
+    //             password: ['', Validators.compose([Validators.required, Validators.minLength(5)])]
+    //         }
+    //     )
+    // }
 
     fillUserForm(user: UserModel) {
         this.userForm.patchValue({

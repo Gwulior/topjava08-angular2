@@ -1,22 +1,21 @@
-import {Component, ViewChild} from "@angular/core";
+import {Component, ViewChild, OnInit} from "@angular/core";
 import {Observable} from "rxjs/Rx";
-import {UserModel} from "../model/user.model";
-import {UserService} from "./user.service";
 import {UserEditComponent} from "./user-edit.component";
-import {ErrorModel} from "../model/error.model";
-import {I18nService} from "../i18n/i18n.service";
-import {ExceptionService} from "../service/exception/exception.service";
+import {UserModel} from "../../model/user.model";
+import {UserService} from "../../service/user.service";
+import {I18nService} from "../../service/i18n.service";
+import {ExceptionService} from "../../service/exception.service";
+
 /**
  * Created by gwuli on 30.10.2016.
  */
 
 @Component({
-    templateUrl: "./templates/user/user-list.html"
+    templateUrl: "../../../templates/user/user-list.html"
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
 
     usersHolder: Observable<UserModel[]>;
-    errors: ErrorModel[] = [];
 
     @ViewChild(UserEditComponent)
     private userEditChild: UserEditComponent;
@@ -24,6 +23,9 @@ export class UserListComponent {
     constructor(private userService: UserService,
                 private i18Service: I18nService,
                 private exceptionService: ExceptionService) {
+    }
+
+    ngOnInit(): void {
         this.reloadUsers();
     }
 
@@ -43,10 +45,6 @@ export class UserListComponent {
 
     onSave(user: UserModel) {
         this.userService.saveUser(user)
-            // .catch((error: any) => {
-            //     this.exceptionService.onError(error);
-            //     return Observable.throw(error.json().error || 'Server error')
-            // })
             .subscribe(
                 res => {
                     this.reloadUsers();
@@ -67,11 +65,7 @@ export class UserListComponent {
 
     onChangeActiveStatus(user: UserModel) {
         user.enabled = !user.enabled;
-        this.userService.saveUser(user)
-            // .catch((error: any) => {
-            //     this.header.onError(error);
-            //     return Observable.throw(error.json().error || 'Server error')
-            // })
+        this.userService.changeActiveStatus(user)
             .subscribe(
                 res => {
                     this.reloadUsers();

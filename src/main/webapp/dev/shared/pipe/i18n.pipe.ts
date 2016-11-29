@@ -1,5 +1,6 @@
 import {PipeTransform, Pipe} from "@angular/core";
-import {I18nService} from "../i18n/i18n.service";
+import {I18nService} from "../../service/i18n.service";
+
 /**
  * Created by gwuli on 14.11.2016.
  */

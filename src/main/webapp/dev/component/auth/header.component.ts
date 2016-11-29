@@ -1,22 +1,21 @@
 /**
  * Created by gwuli on 09.11.2016.
  */
-import {Component, Injectable} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {AuthService} from "../auth/auth.service";
+import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
-import {I18nService} from "../i18n/i18n.service";
-import {I18Enum} from "../i18n/i18n.enum";
-import {ErrorModel} from "../model/error.model";
-import {ExceptionService} from "../service/exception/exception.service";
+import {I18nService} from "../../service/i18n.service";
+import {I18Enum} from "../../model/i18n.enum";
+import {ErrorModel} from "../../model/error.model";
+import {ExceptionService} from "../../service/exception.service";
 
 @Component({
-    templateUrl: './templates/shared/header.html',
+    templateUrl: '../../../templates/auth/header.html',
     selector: 'my-header-component',
-    styleUrls: ["./assets/i18n.css"]
+    styleUrls: ["../../../resources/css/i18n.css"]
 })
-@Injectable()
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
     private errors: ErrorModel[] = [];
 
@@ -30,7 +29,10 @@ export class HeaderComponent {
                 private formBuilder: FormBuilder,
                 private i18Service: I18nService,
                 private exceptionService: ExceptionService) {
-        exceptionService.errorStream.subscribe(
+    }
+
+    ngOnInit(): void {
+        this.exceptionService.errorStream.subscribe(
             e => {
                 this.errors.push(e);
             }

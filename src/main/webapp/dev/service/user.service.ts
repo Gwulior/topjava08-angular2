@@ -1,9 +1,9 @@
 import {Http, Response} from "@angular/http";
-import {basePath, profilePath, reqOptions, reqOptionsJson, registerPath, usersPath} from "../shared/config.component";
 import {Observable} from "rxjs/Rx";
 import {UserModel} from "../model/user.model";
 import {Injectable} from "@angular/core";
-import {DateTimeTransformer} from "../date-time.transformer";
+import {DateTimeTransformer} from "../shared/date-time.transformer";
+import {reqOptions, profilePath, basePath, reqOptionsJson, registerPath, usersPath} from "../shared/config";
 /**
  * Created by gwuli on 10.11.2016.
  */
@@ -22,6 +22,7 @@ export class UserService {
             return res.json();
         });
     }
+
     saveOwnProfle(value: UserModel): Observable<Response> {
         return this.http.put(basePath + profilePath, JSON.stringify(value), reqOptionsJson);
     }
@@ -32,12 +33,8 @@ export class UserService {
     }
 
 
-    getUsers():Observable<UserModel[]> {
-        return this.http.get(basePath + usersPath, reqOptions).map(this.mapUsers);
-    }
-
-    private mapUsers(res: Response): UserModel[] {
-        return res.json();
+    getUsers(): Observable<UserModel[]> {
+        return this.http.get(basePath + usersPath, reqOptions).map(res => res.json());
     }
 
     delete(user: UserModel): Observable<Response> {
@@ -50,6 +47,10 @@ export class UserService {
         } else {
             return this.createUser(user);
         }
+    }
+
+    changeActiveStatus(user: UserModel): Observable<Response> {
+        return this.http.patch(basePath + usersPath + user.id + '/' + user.enabled, null);
     }
 
     private updateUser(user: UserModel): Observable<Response> {

@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Http, Response, URLSearchParams, RequestOptionsArgs} from "@angular/http";
-import {basePath, mealPath, reqOptions, reqOptionsJson} from "../shared/config.component";
 import {Observable} from "rxjs";
 import {UserMeal} from "../model/meal.model";
-import {DateTimeTransformer} from "../date-time.transformer";
+import {DateTimeTransformer} from "../shared/date-time.transformer";
+import {reqOptions, mealPath, basePath, reqOptionsJson} from "../shared/config";
 /**
  * Created by gwuli on 30.10.2016.
  */
@@ -13,7 +13,6 @@ export class MealService {
 
     constructor(private http: Http,
                 private dateTimeTransformer: DateTimeTransformer) {
-
     }
 
     loadAllMeals(): Observable<UserMeal[]> {

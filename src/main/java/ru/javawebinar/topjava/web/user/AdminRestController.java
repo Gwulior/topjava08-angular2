@@ -1,13 +1,10 @@
 package ru.javawebinar.topjava.web.user;
 
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javawebinar.topjava.model.User;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 /**
@@ -21,7 +18,9 @@ public class AdminRestController extends AbstractUserController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAll() {
-        return super.getAll();
+        List<User> all = super.getAll();
+        all.forEach(a -> a.setPassword(""));
+        return all;
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -30,17 +29,9 @@ public class AdminRestController extends AbstractUserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> createWithLocation(@Valid @RequestBody User user) {
-        User created = super.create(user);
+    public void createWithLocation(@Valid @RequestBody User user) {
+       super.create(user);
 
-        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_URL + "/{id}")
-                .buildAndExpand(created.getId()).toUri();
-
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.setLocation(uriOfNewResource);
-
-        return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -56,5 +47,10 @@ public class AdminRestController extends AbstractUserController {
     @GetMapping(value = "/by", produces = MediaType.APPLICATION_JSON_VALUE)
     public User getByMail(@RequestParam("email") String email) {
         return super.getByMail(email);
+    }
+
+    @PatchMapping(value = "/{id}/{enabled}")
+    public void enabled(@PathVariable("id") int id, @PathVariable("enabled") boolean enabled) {
+        super.enable(id, enabled);
     }
 }

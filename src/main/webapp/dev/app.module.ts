@@ -4,27 +4,27 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {AppComponent} from "./app.component";
 import {routing} from "./app.routes";
-import {MealListComponent} from "./meal/meal-list.component";
-import {LoginComponent} from "./auth/login.component";
-import {AuthService} from "./auth/auth.service";
-import {AuthActivateGuard} from "./auth/auth.activate.guard";
-import {MealService} from "./meal/meal.service";
-import {EditMealComponent} from "./meal/meal-edit.component";
-import {CalendarModule} from "primeng/components/calendar/calendar";
-import {HeaderComponent} from "./shared/header.component";
-import {ProfileComponent} from "./user/profile.component";
-import {UserService} from "./user/user.service";
-import {RegisterComponent} from "./shared/register.component";
-import {UserListComponent} from "./user/user-list.component";
-import {UserEditComponent} from "./user/user-edit.component";
-import {I18nPipe} from "./pipe/i18n.pipe";
-import {I18nService} from "./i18n/i18n.service";
-import {I18Enum} from "./i18n/i18n.enum";
+import {I18nService} from "./service/i18n.service";
+import {I18Enum} from "./model/i18n.enum";
 import {DataTableModule} from "primeng/components/datatable/datatable";
 import {DatePipe} from "@angular/common";
-import {DateTimeTransformer} from "./date-time.transformer";
+import {DateTimeTransformer} from "./shared/date-time.transformer";
 import {GrowlModule} from "primeng/components/growl/growl";
-import {ExceptionService} from "./service/exception/exception.service";
+import {ExceptionService} from "./service/exception.service";
+import {CalendarModule} from "primeng/components/calendar/calendar";
+import {MealListComponent} from "./component/meal/meal-list.component";
+import {EditMealComponent} from "./component/meal/meal-edit.component";
+import {HeaderComponent} from "./component/auth/header.component";
+import {ProfileComponent} from "./component/user/profile.component";
+import {RegisterComponent} from "./component/user/register.component";
+import {UserListComponent} from "./component/user/user-list.component";
+import {UserEditComponent} from "./component/user/user-edit.component";
+import {I18nPipe} from "./shared/pipe/i18n.pipe";
+import {EntryComponent} from "./component/auth/entry.component";
+import {AuthService} from "./service/auth.service";
+import {AuthActivateGuard} from "./shared/auth.activate.guard";
+import {MealService} from "./service/meal.service";
+import {UserService} from "./service/user.service";
 
 /**
  * Created by gwuli on 30.10.2016.
@@ -33,7 +33,7 @@ import {ExceptionService} from "./service/exception/exception.service";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpModule, routing, CalendarModule, DataTableModule, GrowlModule],
-    declarations: [AppComponent, MealListComponent, LoginComponent,
+    declarations: [AppComponent, MealListComponent, EntryComponent,
         EditMealComponent, HeaderComponent,
         ProfileComponent,
         RegisterComponent,

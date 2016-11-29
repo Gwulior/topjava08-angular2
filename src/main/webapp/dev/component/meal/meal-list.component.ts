@@ -1,18 +1,24 @@
-import {Component, ViewChild} from "@angular/core";
-import {MealService} from "./meal.service";
+import {Component, ViewChild, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
 import {FormBuilder} from "@angular/forms";
 import {EditMealComponent} from "./meal-edit.component";
-import {UserMeal} from "../model/meal.model";
+import {UserMeal} from "../../model/meal.model";
+import {MealService} from "../../service/meal.service";
+
 /**
  * Created by gwuli on 30.10.2016.
  */
 
 @Component({
     selector: 'meal-list',
-    templateUrl: './templates/meal/meal-list.html'
+    templateUrl: '../../../templates/meal/meal-list.html'
 })
-export class MealListComponent {
+export class MealListComponent implements OnInit {
+
+    startDate: Date;
+    endDate: Date;
+    startTime: Date;
+    endTime: Date;
 
     mealsHolder: Observable<UserMeal[]>;
 
@@ -23,18 +29,11 @@ export class MealListComponent {
                 private formBuilder: FormBuilder) {
     }
 
-    startDate: Date;
-    endDate: Date;
-    startTime: Date;
-    endTime: Date;
-
     ngOnInit() {
-        console.log("meals init");
         this.mealsHolder = this.mealService.loadAllMeals();
     }
 
     updateList() {
-        console.log("meals update");
         this.mealsHolder = this.mealService.loadAllMeals();
     }
 

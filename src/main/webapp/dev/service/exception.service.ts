@@ -1,7 +1,7 @@
 import {Subject} from "rxjs/Rx";
-import {ErrorModel} from "../../model/error.model";
+import {ErrorModel} from "../model/error.model";
 import {Injectable} from "@angular/core";
-import {I18nService} from "../../i18n/i18n.service";
+import {I18nService} from "./i18n.service";
 /**
  * Created by gwuli on 28.11.2016.
  */
@@ -14,7 +14,6 @@ export class ExceptionService {
 
     constructor(private i18Service: I18nService) {
         this._errorStream = new Subject<ErrorModel>();
-
     }
 
     get errorStream() {
@@ -38,6 +37,8 @@ export class ExceptionService {
                 errorModel = new ErrorModel(this.i18Service.getMessage('exception.disabled'), null)
             } else if (error.cause === 'DataIntegrityViolationException') {
                 errorModel = new ErrorModel(this.i18Service.getMessage('exception.duplicate_email'), null);
+            }else if (error.cause === 'InsufficientAuthenticationException') {
+                errorModel = new ErrorModel(this.i18Service.getMessage('exception.sessionExpired'), null);
             }
         }
 
