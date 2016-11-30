@@ -1,1 +1,1 @@
-web:    java $JAVA_OPTS -Dspring.profiles.active="datajpa,heroku" -DTOPJAVA_ROOT="." -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
+web:    java $JAVA_OPTS -agentlib:jdwp=transport=dt_socket,address=$IPADDR:9999,suspend=y,server=n -Dspring.profiles.active="datajpa,heroku" -DTOPJAVA_ROOT="$HOME" -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
