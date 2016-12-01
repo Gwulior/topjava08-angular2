@@ -15,7 +15,12 @@ public class CustomReloadableResourceBundleMessageSource extends ReloadableResou
     private static final Logger log = LoggerFactory.getLogger(CustomReloadableResourceBundleMessageSource.class);
 
     public Properties getAllMessages(Locale locale) {
-        log.warn("Got_messages_from {}", this.getBasenameSet().toString());
+        log.warn("t_start");
+        log.warn(System.getenv("TOPJAVA_ROOT"));
+        log.warn(System.getenv("IPADDR"));
+        log.warn(this.toString());
+        log.warn("t_end");
+
         PropertiesHolder mergedProperties = getMergedProperties(locale);
         return mergedProperties.getProperties();
     }
